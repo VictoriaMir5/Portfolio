@@ -1,0 +1,204 @@
+[Test case for these API requeats:] (https://github.com/VictoriaMir5/Portfolio/blob/main/Test%20case%20API.pdf)
+
+# Add a new pet to the store (Call to POST method)
+
+curl --location 'https://petstore.swagger.io/v2/pet' \
+--header 'Content-Type: application/json' \
+--data '{
+  "id": 10,
+  "category": {
+    "id": 1,
+    "name": "Dog"
+  },
+  "name": "Doggie",
+  "photoUrls": [
+    "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "name": "#dog"
+    }
+  ],
+  "status": "available"
+}'
+
+# Changing the status of an added pet in the store
+
+curl --location --request PUT 'https://petstore.swagger.io/v2/pet' \
+--header 'Content-Type: application/json' \
+--data '{
+  "id": 10,
+  "category": {
+    "id": 1,
+    "name": "Dog"
+  },
+  "name": "Doggie",
+  "photoUrls": [
+    "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "name": "#Doggie"
+    }
+  ],
+  "status": "sold"
+}'
+
+# Add a new pet to the store 
+Calling GET - Trying to create a resource using an invalid method
+
+curl --location --request GET 'https://petstore.swagger.io/v2/pet' \
+--header 'Content-Type: application/json' \
+--header 'Accept: application/json' \
+--data '{
+  "id": 10,
+  "category": {
+    "id": 1,
+    "name": "Dog"
+  },
+  "name": "Doggie",
+  "photoUrls": [
+    "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "name": "#dog"
+    }
+  ],
+  "status": "available"
+}'
+
+# Add a new pet to the store 
+Calling POST - Attempt to create a resource with JSON and c content-type = XML
+
+curl --location 'https://petstore.swagger.io/v2/pet' \
+--header 'Content-Type: application/xml' \
+--header 'Accept: application/json' \
+--data '{
+  "id": 10,
+  "category": {
+    "id": 1,
+    "name": "Dog"
+  },
+  "name": "Doggie",
+  "photoUrls": [
+    "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "name": "#dog"
+    }
+  ],
+  "status": "available"
+}'
+
+# Add a new pet to the store 
+Calling POST - Attempt to create a resource with JSON and c content-type = Javascript
+
+curl --location 'https://petstore.swagger.io/v2/pet' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/javascript' \
+--data '{
+  "id": 10,
+  "category": {
+    "id": 1,
+    "name": "Dog"
+  },
+  "name": "Doggie",
+  "photoUrls": [
+    "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "name": "#dog"
+    }
+  ],
+  "status": "available"
+}'
+
+# Add a new pet to the store 
+Calling POST - Attempt to create a resource with a field that does not allow "NULL" but equals "NULL" in the request body
+
+curl --location 'https://petstore.swagger.io/v2/pet' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data '{
+  "id": NULL,
+  "category": {
+    "id": 1,
+    "name": "Dog"
+  },
+  "name": "Doggie",
+  "photoUrls": [
+    "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "name": "#dog"
+    }
+  ],
+  "status": "available"
+}'
+
+# Add a new pet to the store 
+Calling POST - Attempt to create a resource with a field that does not allow "null" but equals "null" in the request body
+
+curl --location 'https://petstore.swagger.io/v2/pet' \
+--header 'Content-Type: application/json' \
+--data '{
+  "id": null,
+  "category": {
+    "id": 1,
+    "name": "Dog"
+  },
+  "name": "Doggie",
+  "photoUrls": [
+    "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "name": "#dog"
+    }
+  ],
+  "status": "available"
+}'\'''
+
+# Add a new pet to the store 
+Calling POST - Attempt to create a resource using a non-existent address
+
+curl --location 'https://petstore.swagger.io/v2/pet1' \
+--header 'Content-Type: application/json' \
+--data '{
+  "id": 10,
+  "category": {
+    "id": 1,
+    "name": "Dog"
+  },
+  "name": "Doggie",
+  "photoUrls": [
+    "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "name": "#dog"
+    }
+  ],
+  "status": "available"
+}'
+
+# Add a new pet to the store 
+Calling POST - Attempt to create a resource with an empty JSON object
+
+curl --location 'https://petstore.swagger.io/v2/pet' \
+--header 'Content-Type: application/json' \
+--data '{
+    
+}'
