@@ -1,0 +1,118 @@
+# Create tables and connection between them
+use portfolio;
+
+CREATE TABLE manufacturer (
+        manufacturer_id INT PRIMARY KEY AUTO_INCREMENT,
+        name_manufacturer VARCHAR(50)
+        );
+    
+CREATE TABLE buyer (
+        buyer_id INT PRIMARY KEY AUTO_INCREMENT,
+        name_buyer VARCHAR(50)
+        );
+    
+CREATE TABLE category (
+        category_id INT PRIMARY KEY AUTO_INCREMENT,
+        name_category VARCHAR(30)
+        );
+
+CREATE TABLE product (
+        product_id INT PRIMARY KEY AUTO_INCREMENT,
+           name_product VARCHAR(50),
+    category_id INT,
+    manufacturer_id INT,
+    FOREIGN KEY (category_id)  REFERENCES category (category_id),
+    FOREIGN KEY (manufacturer_id)  REFERENCES manufacturer (manufacturer_id)
+        );
+    
+CREATE TABLE orders (
+        orders_id         INT PRIMARY KEY AUTO_INCREMENT,
+        date_order DATE,
+    product_id INT,
+    buyer_id INT,
+    FOREIGN KEY (product_id)  REFERENCES product (product_id),
+    FOREIGN KEY (buyer_id)  REFERENCES buyer (buyer_id)
+        );
+
+# Entering data into tables
+INSERT INTO buyer 
+        (name_buyer)
+VALUES 
+        ('Ivanov Ivan'), 
+        ('Petrov Petr'),
+        ('Alex');
+    
+INSERT INTO category 
+        (name_category)
+VALUES 
+        ('smartphones'), 
+        ('laptops'),
+        ('PC accessories'),
+        ('TVs');
+    
+INSERT INTO manufacturer 
+        (name_manufacturer)
+VALUES 
+        ('Apple'), 
+        ('MSI'),
+        ('Xiaomi');
+
+INSERT INTO product 
+        (name_product, category_id, manufacturer_id)
+VALUES 
+        ('4.7" smartphone Apple iPhone SE 2022 64 GB', 1, 1), 
+        ('55" (139 sm) TV LED Xiaomi MI TV P1 55', 4, 3),
+        ('15.6" Laptop MSI Katana GF66 12UE-1060RU', 2, 2);
+    
+INSERT INTO orders 
+        (date_order, product_id, buyer_id)
+VALUES 
+        ('2022-02-15', 1, 2), 
+        ('2022-06-10', 2, 3),
+        ('2022-09-07', 3, 1);
+
+# Combining data from the entire database in the 'orders' table
+SELECT * FROM orders;
+
+SELECT orders_id, name_buyer, name_product, 
+name_category, name_manufacturer, date_order
+FROM
+        orders
+    JOIN buyer USING(buyer_id)
+    JOIN product USING(product_id)
+    JOIN manufacturer USING(manufacturer_id)
+    JOIN category USING(category_id);
+
+# Search for Petr Petrov’s order
+SELECT orders_id, name_buyer, name_product, name_category, 
+name_manufacturer, date_order
+FROM
+        orders
+    JOIN buyer USING(buyer_id)
+    JOIN product USING(product_id)
+    JOIN manufacturer USING(manufacturer_id)
+    JOIN category USING(category_id)
+WHERE name_buyer = 'Petrov Petr';
+
+# Adding the 'price' column to the 'product' table
+ALTER TABLE product ADD price DECIMAL(8, 2);
+
+UPDATE product
+SET price = 85000
+WHERE product_id = 1;
+
+SELECT * FROM product;
+
+# Search for the most expensive product (provided that all goods have a different price)
+SELECT * FROM product
+ORDER BY price DESC
+LIMIT 1;
+
+# Remove product category from table 'category'
+DELETE FROM category
+WHERE name_category = 'PC accessories';
+
+SELECT * FROM category;
+
+# Remote database
+DROP DATABASE portfolio;
